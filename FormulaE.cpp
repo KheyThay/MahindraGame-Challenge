@@ -148,3 +148,26 @@ lcd.write(byte(i % 2 + 1));
 }
 }
 }
+void verificarColisao(int y) {
+int carroY = (analogRead(A0) > 50) ? 0 : 1;
+if (carroY == y) {
+jogo = 0;
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print("Voce Bateu!");
+delay(3000);
+reiniciarJogo();
+}
+}
+
+void reiniciarJogo() {
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print("Reiniciando...");
+delay(2000);
+jogo = 1;
+x = 0;
+for (int i = 0; i < 4; i++) {
+obstaculos[i] = 24 + i * 4;
+}
+}
