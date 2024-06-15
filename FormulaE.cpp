@@ -177,3 +177,19 @@ return (random(0, 2) == 0) ? ultimoY : 1 - ultimoY;
 int calcularDelay() {
 return max(50, 500 - (analogRead(A1) / 2));
 }
+
+void tocarSom(int frequencia, int duracao) {
+tone(7, frequencia, duracao);
+delay(duracao + 1); // Pequena pausa para evitar travas
+}
+
+void tocarMusica() {
+unsigned long tempoAtual = millis();
+
+// Toca a próxima nota se o tempo da nota anterior passou
+if (tempoAtual - tempoAnterior >= duracoes[notaAtual]) {
+tempoAnterior = tempoAtual;
+tone(7, melodia[notaAtual], duracoes[notaAtual]);
+notaAtual = (notaAtual + 1) % (sizeof(melodia) / sizeof(melodia[0])); // Avança para a próxima nota e faz o loop da melodia
+}
+}
