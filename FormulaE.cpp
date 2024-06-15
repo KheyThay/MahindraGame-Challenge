@@ -65,3 +65,65 @@ void setup() {
         posicoesY[i] = random(0, 2);
     }
 }
+void loop() {
+if (jogo == 0) {
+contarRegressivamente();
+} else if (jogo == 1) {
+moverObstaculos();
+atualizarTela();
+tocarMusica();
+
+for (int i = 0; i < 4; i++) {
+if (obstaculos[i] <= 0) {
+obstaculos[i] = 16;
+verificarColisao(posicoesY[i]);
+posicoesY[i] = novaPosicaoYAleatoria(ultimaPosicaoY);
+ultimaPosicaoY = posicoesY[i];
+}
+}
+
+delay(calcularDelay());
+}
+}
+
+void contarRegressivamente() {
+lcd.clear();
+lcd.setCursor(4, 0);
+lcd.print("Preparado?");
+delay(1000);
+
+lcd.clear();
+lcd.setCursor(7, 0);
+lcd.print("3");
+digitalWrite(8, HIGH); // Acende LED Vermelho 1
+tocarSom(1000, 200); // Toca som
+delay(800);
+digitalWrite(8, LOW); // Apaga LED Vermelho 1
+
+lcd.clear();
+lcd.setCursor(7, 0);
+lcd.print("2");
+digitalWrite(9, HIGH); // Acende LED Vermelho 2
+tocarSom(1000, 200); // Toca som
+delay(800);
+digitalWrite(9, LOW); // Apaga LED Vermelho 2
+
+lcd.clear();
+lcd.setCursor(7, 0);
+lcd.print("1");
+digitalWrite(10, HIGH); // Acende LED Amarelo
+tocarSom(1000, 200); // Toca som
+delay(800);
+digitalWrite(10, LOW); // Apaga LED Amarelo
+
+lcd.clear();
+lcd.setCursor(6, 0);
+lcd.print("Go!");
+digitalWrite(13, HIGH); // Acende LED Verde
+tocarSom(2000, 400); // Toca som mais forte
+delay(600);
+digitalWrite(13, LOW); // Apaga LED Verde
+
+jogo = 1;
+inicioJogo = millis();
+}
