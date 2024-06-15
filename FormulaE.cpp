@@ -174,3 +174,6 @@ obstaculos[i] = 24 + i * 4;
 int novaPosicaoYAleatoria(int ultimoY) {
 return (random(0, 2) == 0) ? ultimoY : 1 - ultimoY;
 }
+int calcularDelay() {
+return max(50, 500 - (analogRead(A1) / 2));
+}
