@@ -127,3 +127,9 @@ digitalWrite(13, LOW); // Apaga LED Verde
 jogo = 1;
 inicioJogo = millis();
 }
+
+void moverObstaculos() {
+for (int i = 0; i < 4; i++) {
+obstaculos[i] -= 1;
+}
+}
