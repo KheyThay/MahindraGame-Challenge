@@ -133,3 +133,18 @@ for (int i = 0; i < 4; i++) {
 obstaculos[i] -= 1;
 }
 }
+
+void atualizarTela() {
+lcd.clear();
+
+int carroY = (analogRead(A0) > 50) ? 0 : 1;
+lcd.setCursor(0, carroY);
+lcd.write(byte(0));
+
+for (int i = 0; i < 4; i++) {
+if (obstaculos[i] >= 0) {
+lcd.setCursor(obstaculos[i], posicoesY[i]);
+lcd.write(byte(i % 2 + 1));
+}
+}
+}
