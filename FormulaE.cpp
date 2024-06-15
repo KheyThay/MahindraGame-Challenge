@@ -171,3 +171,6 @@ for (int i = 0; i < 4; i++) {
 obstaculos[i] = 24 + i * 4;
 }
 }
+int novaPosicaoYAleatoria(int ultimoY) {
+return (random(0, 2) == 0) ? ultimoY : 1 - ultimoY;
+}
