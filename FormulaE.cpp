@@ -43,3 +43,25 @@ int obstaculos[4] = {24, 28, 32, 36};
 int posicoesY[4];
 int ultimaPosicaoY = 0;
 unsigned long inicioJogo = 0;
+
+void setup() {
+    lcd.begin(16, 2);
+    lcd.createChar(0, carro);
+    lcd.createChar(1, obstaculo1);
+    lcd.createChar(2, obstaculo2);
+
+    Serial.begin(9600);
+    pinMode(A0, INPUT);
+    pinMode(A1, INPUT);
+
+    pinMode(8, OUTPUT);
+    pinMode(9, OUTPUT);
+    pinMode(10, OUTPUT);
+    pinMode(13, OUTPUT);
+
+    pinMode(7, OUTPUT);
+
+    for (int i = 0; i < 4; i++) {
+        posicoesY[i] = random(0, 2);
+    }
+}
