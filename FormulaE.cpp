@@ -43,6 +43,45 @@ int obstaculos[4] = {24, 28, 32, 36};
 int posicoesY[4];
 int ultimaPosicaoY = 0;
 unsigned long inicioJogo = 0;
+// Notas musicais (frequências em Hz)
+#define NOTE_C4 262
+#define NOTE_D4 294
+#define NOTE_E4 330
+#define NOTE_F4 349
+#define NOTE_G4 392
+#define NOTE_A4 440
+#define NOTE_B4 494
+#define NOTE_C5 523
+
+#define NOTE_G3 196
+#define NOTE_E3 165
+#define NOTE_A3 220
+#define NOTE_B3 247
+#define NOTE_AS3 233
+
+// Melodia da música de corrida (frequências das notas)
+int melodia[] = {
+NOTE_E4, NOTE_E4, NOTE_E4, NOTE_C4, NOTE_E4, NOTE_G4,
+NOTE_G3, NOTE_C4, NOTE_G3, NOTE_E3, NOTE_A3, NOTE_B3, NOTE_AS3, NOTE_A3,
+NOTE_G3, NOTE_E4, NOTE_G4, NOTE_A4, NOTE_F4, NOTE_G4,
+NOTE_E4, NOTE_C4, NOTE_D4, NOTE_B3
+};
+
+// Durações das notas (em milissegundos)
+int duracoes[] = {
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150,
+  300, 150, 150, 300, 150, 150, 300, 150, 150, 300, 150, 150, 300
+};
+
+
+int notaAtual = 0;
+unsigned long tempoAnterior = 0;
 
 void setup() {
     lcd.begin(16, 2);
@@ -53,14 +92,14 @@ void setup() {
     Serial.begin(9600);
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
-
+// Configura os pinos dos LEDs
     pinMode(8, OUTPUT);
     pinMode(9, OUTPUT);
     pinMode(10, OUTPUT);
     pinMode(13, OUTPUT);
-
+// Configura o pino do buzzer
     pinMode(7, OUTPUT);
-
+// Inicializa posições Y dos obstáculos aleatoriamente
     for (int i = 0; i < 4; i++) {
         posicoesY[i] = random(0, 2);
     }
